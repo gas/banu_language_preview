@@ -161,7 +161,7 @@
         </div>
 
         <div class="mt-4 relative">
-            <div id="preview" class="border rounded-lg p-4 min-h-[100px] whitespace-pre-wrap font-banu bg-base-200" style="font-size:35px!important;"></div>
+            <div id="preview" class="border rounded-lg p-4 min-h-[100px] whitespace-pre-wrap font-banu bg-base-200"></div>
             <div class="absolute top-2 right-2 flex space-x-2">
                 <button id="increaseFontSize" class="btn btn-circle btn-sm">+</button>
                 <button id="decreaseFontSize" class="btn btn-circle btn-sm">-</button>
@@ -231,7 +231,7 @@
         const input = document.getElementById('input');
         const preview = document.getElementById('preview');
         const downloadBtn = document.getElementById('download');
-        let fontSize = 16;
+        let fontSize = 26;
 
         function updatePreview() {
             preview.textContent = input.value || ' ';
@@ -257,12 +257,12 @@
         input.addEventListener('input', updatePreview);
 
         document.getElementById('increaseFontSize').addEventListener('click', () => {
-            fontSize = Math.min(72, fontSize + 1);
+            fontSize = Math.min(72, fontSize + 2);
             preview.style.fontSize = `${fontSize}px`;
         });
 
         document.getElementById('decreaseFontSize').addEventListener('click', () => {
-            fontSize = Math.max(8, fontSize - 1);
+            fontSize = Math.max(8, fontSize - 2);
             preview.style.fontSize = `${fontSize}px`;
         });
 
