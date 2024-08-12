@@ -56,6 +56,10 @@
         .character-table th {
             background-color: rgba(var(--b2) / 0.5);
         }
+        .glyph-cell {
+            background-color: rgba(var(--b3) / 1);
+            font-size: 24px;
+        }
     </style>
 </head>
 <body>
@@ -115,7 +119,7 @@
                 </tr>
                 <tr>
                     <th>Glifo</th>
-                    <td class="font-banu">0</td><td class="font-banu">1</td><td class="font-banu">2</td><td class="font-banu">3</td><td class="font-banu">4</td><td class="font-banu">5</td><td class="font-banu">6</td><td class="font-banu">7</td><td class="font-banu">8</td><td class="font-banu">9</td>
+                    <td class="font-banu glyph-cell">0</td><td class="font-banu glyph-cell">1</td><td class="font-banu glyph-cell">2</td><td class="font-banu glyph-cell">3</td><td class="font-banu glyph-cell">4</td><td class="font-banu glyph-cell">5</td><td class="font-banu glyph-cell">6</td><td class="font-banu glyph-cell">7</td><td class="font-banu glyph-cell">8</td><td class="font-banu glyph-cell">9</td>
                 </tr>
             </table>
             <button onclick="downloadTable('table1')" class="btn btn-secondary mt-2">Descargar Tabla</button>
@@ -130,7 +134,7 @@
                 </tr>
                 <tr>
                     <th>Glifo</th>
-                    <td class="font-banu">æ</td><td class="font-banu">a</td><td class="font-banu">u</td><td class="font-banu">i</td><td class="font-banu">e</td><td class="font-banu">o</td>
+                    <td class="font-banu glyph-cell">æ</td><td class="font-banu glyph-cell">a</td><td class="font-banu glyph-cell">u</td><td class="font-banu glyph-cell">i</td><td class="font-banu glyph-cell">e</td><td class="font-banu glyph-cell">o</td>
                 </tr>
             </table>
             <button onclick="downloadTable('table2')" class="btn btn-secondary mt-2">Descargar Tabla</button>
@@ -141,7 +145,7 @@
             <table>
                 <thead>
                     <tr>
-                        <th>Consonante</th>
+                        <th></th>
                         <th>æ</th><th>a</th><th>u</th><th>i</th><th>e</th><th>o</th>
                     </tr>
                 </thead>
@@ -222,7 +226,7 @@
                 vowels.forEach(vowel => {
                     const td = document.createElement('td');
                     td.textContent = consonant + vowel;
-                    td.className = 'font-banu';
+                    td.className = 'font-banu glyph-cell';
                     row.appendChild(td);
                 });
 
@@ -231,7 +235,7 @@
                 // Repeat header every 10 rows and at the end
                 if ((index + 1) % 10 === 0 || index === consonants.length - 1) {
                     const headerRow = document.createElement('tr');
-                    headerRow.innerHTML = `<th>Consonante</th><th>æ</th><th>a</th><th>u</th><th>i</th><th>e</th><th>o</th>`;
+                    headerRow.innerHTML = `<th></th><th>æ</th><th>a</th><th>u</th><th>i</th><th>e</th><th>o</th>`;
                     tbody.appendChild(headerRow);
                 }
             });
