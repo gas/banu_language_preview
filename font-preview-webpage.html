@@ -3,57 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Previsualización de Fuente</title>
+    <title>SRB2Banu</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
         @font-face {
             font-family: 'CustomFont';
-            /* Asegúrate de que el nombre del archivo coincida con tu archivo OTF */
-            src: url('./font/Banu-Regular.otf') format('opentype');
+            src: url('./tu-fuente.otf') format('opentype');
         }
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px;
-        }
-        textarea, #preview {
-            width: 100%;
-            max-width: 600px;
-            margin: 10px 0;
-            padding: 10px;
-        }
-        #preview {
+        .font-custom {
             font-family: 'CustomFont', sans-serif;
-            border: 1px solid #ccc;
-            min-height: 100px;
         }
-        button {
-            margin: 10px;
-            padding: 10px 20px;
+        .theme-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+        .orange-theme {
+            background-color: #FFA500;
+            color: #000;
         }
     </style>
 </head>
-<body>
-    <h1>Previsualización de Fuente</h1>
-    <textarea id="input" rows="4" placeholder="Introduce tu texto aquí..."></textarea>
-    <button id="refresh">Actualizar</button>
-    <div id="preview"></div>
-    <button id="download">Descargar como Imagen</button>
+<body class="min-h-screen p-8 transition-colors duration-300 bg-white">
+    <div class="max-w-3xl mx-auto">
+        <div class="flex justify-between items-center mb-8">
+            <h1 class="text-3xl font-bold text-gray-900">SRB2Banu</h1>
+            <div class="flex space-x-2">
+                <button id="lightTheme" class="theme-toggle">🌞</button>
+                <button id="darkTheme" class="theme-toggle">🌙</button>
+                <button id="orangeTheme" class="theme-toggle">🍊</button>
+            </div>
+        </div>
+
+        <div class="text-center mb-6">
+            <p class="text-gray-700">EN: SRB (Standard Romanized Banu) to Ochoa Visualizer</p>
+            <p class="text-gray-700">ES: Visualizador de SRB (Banu Estándar Romanizado) a Ochoa</p>
+        </div>
+
+        <div class="relative mb-4">
+            <textarea id="input" class="w-full h-40 p-4 border rounded-lg resize-none focus:ring-2 focus:ring-blue-500" placeholder="Introduce tu texto aquí..."></textarea>
+        </div>
+
+        <div class="relative mb-4">
+            <div id="preview" class="w-full min-h-[100px] p-4 border rounded-lg overflow-auto whitespace-pre-wrap font-custom"></div>
+            <div class="absolute top-2 right-2 flex space-x-2">
+                <button id="increaseFontSize" class="p-1 bg-gray-200 rounded">➕</button>
+                <button id="decreaseFontSize" class="p-1 bg-gray-200 rounded">➖</button>
+            </div>
+            <div class="absolute top-2 left-2 flex space-x-2">
+                <button id="alignLeft" class="p-1 bg-gray-200 rounded">⇤</button>
+                <button id="alignCenter" class="p-1 bg-gray-200 rounded">⇔</button>
+                <button id="alignRight" class="p-1 bg-gray-200 rounded">⇥</button>
+            </div>
+        </div>
+
+        <button id="download" class="w-full py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors duration-300">
+            Descargar como Imagen
+        </button>
+    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script>
         const input = document.getElementById('input');
         const preview = document.getElementById('preview');
-        const refreshBtn = document.getElementById('refresh');
         const downloadBtn = document.getElementById('download');
+        let fontSize = 16;
 
         function updatePreview() {
             preview.textContent = input.value;
         }
 
         input.addEventListener('input', updatePreview);
-        refreshBtn.addEventListener('click', updatePreview);
+
+        document.getElementById('lightTheme').addEventListener('click', () => document.body.className = 'min-h-screen p-8 transition-colors duration-300 bg-white');
+        document.getElementById('darkTheme').addEventListener('click', () => document.body.className = 'min-h-screen p-8 transition-colors duration-300 bg-gray-800 text-white');
+        document.getElementById('orangeTheme').addEventListener('click', () => document.body.className = 'min-h-screen p-8 transition-colors duration-300 orange-theme');
+
+        document.getElementById('increaseFontSize').addEventListener('click', () => {
+            fontSize = Math.min(72, fontSize + 1);
+            preview.style.fontSize = `${fontSize}px`;
+        });
+
+        document.getElementById('decreaseFontSize').addEventListener('click', () => {
+            fontSize = Math.max(8, fontSize - 1);
+            preview.style.fontSize = `${fontSize}px`;
+        });
+
+        document.getElementById('alignLeft').addEventListener('click', () => preview.style.textAlign = 'left');
+        document.getElementById('alignCenter').addEventListener('click', () => preview.style.textAlign = 'center');
+        document.getElementById('alignRight').addEventListener('click', () => preview.style.textAlign = 'right');
 
         downloadBtn.addEventListener('click', () => {
             html2canvas(preview).then(canvas => {
@@ -63,6 +101,9 @@
                 link.click();
             });
         });
+
+        // Inicialización
+        updatePreview();
     </script>
 </body>
 </html>
