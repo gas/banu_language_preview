@@ -112,18 +112,10 @@
                 <tr>
                     <th>Número</th>
                     <td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td>
-                    <td>10</td><td>20</td><td>30</td><td>40</td><td>50</td><td>60</td><td>70</td><td>80</td><td>90</td>
-                    <td>100</td><td>200</td><td>300</td><td>400</td><td>500</td><td>600</td><td>700</td><td>800</td><td>900</td>
-                    <td>1000</td><td>2k</td><td>3k</td><td>4k</td><td>5k</td><td>6k</td><td>7k</td><td>8k</td><td>9k</td><td>10k</td><td>100k</td>
-                    <td>1m</td><td>10m</td><td>100m</td><td>1b</td><td>10b</td><td>100b</td><td>1tr</td>
                 </tr>
                 <tr>
                     <th>Glifo</th>
                     <td class="font-banu">0</td><td class="font-banu">1</td><td class="font-banu">2</td><td class="font-banu">3</td><td class="font-banu">4</td><td class="font-banu">5</td><td class="font-banu">6</td><td class="font-banu">7</td><td class="font-banu">8</td><td class="font-banu">9</td>
-                    <td class="font-banu">10</td><td class="font-banu">20</td><td class="font-banu">30</td><td class="font-banu">40</td><td class="font-banu">50</td><td class="font-banu">60</td><td class="font-banu">70</td><td class="font-banu">80</td><td class="font-banu">90</td>
-                    <td class="font-banu">100</td><td class="font-banu">200</td><td class="font-banu">300</td><td class="font-banu">400</td><td class="font-banu">500</td><td class="font-banu">600</td><td class="font-banu">700</td><td class="font-banu">800</td><td class="font-banu">900</td>
-                    <td class="font-banu">1000</td><td class="font-banu">2k</td><td class="font-banu">3k</td><td class="font-banu">4k</td><td class="font-banu">5k</td><td class="font-banu">6k</td><td class="font-banu">7k</td><td class="font-banu">8k</td><td class="font-banu">9k</td><td class="font-banu">10k</td><td class="font-banu">100k</td>
-                    <td class="font-banu">1m</td><td class="font-banu">10m</td><td class="font-banu">100m</td><td class="font-banu">1b</td><td class="font-banu">10b</td><td class="font-banu">100b</td><td class="font-banu">1tr</td>
                 </tr>
             </table>
             <button onclick="downloadTable('table1')" class="btn btn-secondary mt-2">Descargar Tabla</button>
@@ -153,7 +145,7 @@
                         <th>æ</th><th>a</th><th>u</th><th>i</th><th>e</th><th>o</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="consonantTableBody">
                     <!-- Generaremos las filas dinámicamente con JavaScript -->
                 </tbody>
             </table>
@@ -175,6 +167,18 @@
 
         function setTheme(theme) {
             document.documentElement.setAttribute('data-theme', theme);
+        }
+
+        function downloadTable(tableId) {
+            const table = document.getElementById(tableId);
+            html2canvas(table, {
+                backgroundColor: '#000000',
+            }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = `${tableId}.png`;
+                link.href = canvas.toDataURL();
+                link.click();
+            });
         }
 
         input.addEventListener('input', updatePreview);
@@ -204,22 +208,10 @@
             });
         });
 
-        function downloadTable(tableId) {
-            const table = document.getElementById(tableId);
-            html2canvas(table, {
-                backgroundColor: '#000000',
-            }).then(canvas => {
-                const link = document.createElement('a');
-                link.download = `${tableId}.png`;
-                link.href = canvas.toDataURL();
-                link.click();
-            });
-        }
-
         function generateConsonantTable() {
             const consonants = ['b', 'p', 'd', 't', 'f', 'g', 'k', 'j', 'ch', 'z', 's', 'dz', 'ts', 'l', 'r', 'm', 'n', 'y', 'w', 'mb', 'nd', 'kt', 'my', 'mv', 'ng', 'ks', 'ny', 'mz', 'nj', 'ss', 'fw', 'ml', 'nz', 'sl', 'mw', 'ndz', 'zw', 'ndr'];
             const vowels = ['æ', 'a', 'u', 'i', 'e', 'o'];
-            const tbody = document.querySelector('#table3 tbody');
+            const tbody = document.getElementById('consonantTableBody');
 
             consonants.forEach((consonant, index) => {
                 const row = document.createElement('tr');
@@ -239,5 +231,15 @@
                 // Repeat header every 10 rows and at the end
                 if ((index + 1) % 10 === 0 || index === consonants.length - 1) {
                     const headerRow = document.createElement('tr');
-                    const emptyTh = document.createElement('th');
-                    headerRow.appendChild(emptyTh
+                    headerRow.innerHTML = `<th>Consonante</th><th>æ</th><th>a</th><th>u</th><th>i</th><th>e</th><th>o</th>`;
+                    tbody.appendChild(headerRow);
+                }
+            });
+        }
+
+        // Inicialización
+        updatePreview();
+        generateConsonantTable();
+    </script>
+</body>
+</html>
