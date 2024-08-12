@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SRB2Banu</title>
+    <title>SRB2Ochoa</title>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@3.1.0/dist/full.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -41,6 +41,21 @@
             --b3: 280 46.5% 14.9%;
             --bc: 0 0% 100%;
         }
+        .character-table {
+            overflow-x: auto;
+        }
+        .character-table table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        .character-table th, .character-table td {
+            border: 1px solid var(--bc);
+            padding: 5px;
+            text-align: center;
+        }
+        .character-table th {
+            background-color: rgba(var(--b2) / 0.5);
+        }
     </style>
 </head>
 <body>
@@ -48,7 +63,7 @@
         <div class="navbar bg-base-200 rounded-lg mb-4">
             <div class="flex-1">
                 <img src="./imgs/ochoatitle.png" alt="Ochoa Title" class="h-8 mr-2">
-                <h1 class="text-2xl font-bold">SRB2Banu</h1>
+                <h1 class="text-2xl font-bold">SRB2Ochoa</h1>
             </div>
             <div class="flex-none">
                 <div class="dropdown dropdown-end">
@@ -86,6 +101,64 @@
         </div>
 
         <button id="download" class="btn btn-primary w-full mt-4">Descargar como Imagen</button>
+
+        <div class="divider my-8"></div>
+
+        <h2 class="text-2xl font-bold mb-4">Tablas</h2>
+
+        <div id="table1" class="character-table mb-8">
+            <h3 class="text-xl font-semibold mb-2">Numeración</h3>
+            <table>
+                <tr>
+                    <th>Número</th>
+                    <td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td>
+                    <td>10</td><td>20</td><td>30</td><td>40</td><td>50</td><td>60</td><td>70</td><td>80</td><td>90</td>
+                    <td>100</td><td>200</td><td>300</td><td>400</td><td>500</td><td>600</td><td>700</td><td>800</td><td>900</td>
+                    <td>1000</td><td>2k</td><td>3k</td><td>4k</td><td>5k</td><td>6k</td><td>7k</td><td>8k</td><td>9k</td><td>10k</td><td>100k</td>
+                    <td>1m</td><td>10m</td><td>100m</td><td>1b</td><td>10b</td><td>100b</td><td>1tr</td>
+                </tr>
+                <tr>
+                    <th>Glifo</th>
+                    <td class="font-banu">0</td><td class="font-banu">1</td><td class="font-banu">2</td><td class="font-banu">3</td><td class="font-banu">4</td><td class="font-banu">5</td><td class="font-banu">6</td><td class="font-banu">7</td><td class="font-banu">8</td><td class="font-banu">9</td>
+                    <td class="font-banu">10</td><td class="font-banu">20</td><td class="font-banu">30</td><td class="font-banu">40</td><td class="font-banu">50</td><td class="font-banu">60</td><td class="font-banu">70</td><td class="font-banu">80</td><td class="font-banu">90</td>
+                    <td class="font-banu">100</td><td class="font-banu">200</td><td class="font-banu">300</td><td class="font-banu">400</td><td class="font-banu">500</td><td class="font-banu">600</td><td class="font-banu">700</td><td class="font-banu">800</td><td class="font-banu">900</td>
+                    <td class="font-banu">1000</td><td class="font-banu">2k</td><td class="font-banu">3k</td><td class="font-banu">4k</td><td class="font-banu">5k</td><td class="font-banu">6k</td><td class="font-banu">7k</td><td class="font-banu">8k</td><td class="font-banu">9k</td><td class="font-banu">10k</td><td class="font-banu">100k</td>
+                    <td class="font-banu">1m</td><td class="font-banu">10m</td><td class="font-banu">100m</td><td class="font-banu">1b</td><td class="font-banu">10b</td><td class="font-banu">100b</td><td class="font-banu">1tr</td>
+                </tr>
+            </table>
+            <button onclick="downloadTable('table1')" class="btn btn-secondary mt-2">Descargar Tabla</button>
+        </div>
+
+        <div id="table2" class="character-table mb-8">
+            <h3 class="text-xl font-semibold mb-2">Vocales</h3>
+            <table>
+                <tr>
+                    <th>Vocal</th>
+                    <td>æ</td><td>a</td><td>u</td><td>i</td><td>e</td><td>o</td>
+                </tr>
+                <tr>
+                    <th>Glifo</th>
+                    <td class="font-banu">æ</td><td class="font-banu">a</td><td class="font-banu">u</td><td class="font-banu">i</td><td class="font-banu">e</td><td class="font-banu">o</td>
+                </tr>
+            </table>
+            <button onclick="downloadTable('table2')" class="btn btn-secondary mt-2">Descargar Tabla</button>
+        </div>
+
+        <div id="table3" class="character-table mb-8">
+            <h3 class="text-xl font-semibold mb-2">Consonantes (con vocales)</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Consonante</th>
+                        <th>æ</th><th>a</th><th>u</th><th>i</th><th>e</th><th>o</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Generaremos las filas dinámicamente con JavaScript -->
+                </tbody>
+            </table>
+            <button onclick="downloadTable('table3')" class="btn btn-secondary mt-2">Descargar Tabla</button>
+        </div>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
@@ -97,7 +170,7 @@
 
         function updatePreview() {
             preview.textContent = input.value || ' ';
-            preview.style.textAlign = 'center';  // Alineación centrada por defecto
+            preview.style.textAlign = 'center';
         }
 
         function setTheme(theme) {
@@ -122,7 +195,7 @@
 
         downloadBtn.addEventListener('click', () => {
             html2canvas(preview, {
-                backgroundColor: '#000000',  // Fondo negro para mayor contraste
+                backgroundColor: '#000000',
             }).then(canvas => {
                 const link = document.createElement('a');
                 link.download = 'preview.png';
@@ -131,8 +204,40 @@
             });
         });
 
-        // Inicialización
-        updatePreview();
-    </script>
-</body>
-</html>
+        function downloadTable(tableId) {
+            const table = document.getElementById(tableId);
+            html2canvas(table, {
+                backgroundColor: '#000000',
+            }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = `${tableId}.png`;
+                link.href = canvas.toDataURL();
+                link.click();
+            });
+        }
+
+        function generateConsonantTable() {
+            const consonants = ['b', 'p', 'd', 't', 'f', 'g', 'k', 'j', 'ch', 'z', 's', 'dz', 'ts', 'l', 'r', 'm', 'n', 'y', 'w', 'mb', 'nd', 'kt', 'my', 'mv', 'ng', 'ks', 'ny', 'mz', 'nj', 'ss', 'fw', 'ml', 'nz', 'sl', 'mw', 'ndz', 'zw', 'ndr'];
+            const vowels = ['æ', 'a', 'u', 'i', 'e', 'o'];
+            const tbody = document.querySelector('#table3 tbody');
+
+            consonants.forEach((consonant, index) => {
+                const row = document.createElement('tr');
+                const th = document.createElement('th');
+                th.textContent = consonant;
+                row.appendChild(th);
+
+                vowels.forEach(vowel => {
+                    const td = document.createElement('td');
+                    td.textContent = consonant + vowel;
+                    td.className = 'font-banu';
+                    row.appendChild(td);
+                });
+
+                tbody.appendChild(row);
+
+                // Repeat header every 10 rows and at the end
+                if ((index + 1) % 10 === 0 || index === consonants.length - 1) {
+                    const headerRow = document.createElement('tr');
+                    const emptyTh = document.createElement('th');
+                    headerRow.appendChild(emptyTh
