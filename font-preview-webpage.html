@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Previsualización de Fuente</title>
+    <style>
+        @font-face {
+            font-family: 'CustomFont';
+            /* Asegúrate de que el nombre del archivo coincida con tu archivo OTF */
+            src: url('./font/Banu-Regular.otf') format('opentype');
+        }
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        textarea, #preview {
+            width: 100%;
+            max-width: 600px;
+            margin: 10px 0;
+            padding: 10px;
+        }
+        #preview {
+            font-family: 'CustomFont', sans-serif;
+            border: 1px solid #ccc;
+            min-height: 100px;
+        }
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Previsualización de Fuente</h1>
+    <textarea id="input" rows="4" placeholder="Introduce tu texto aquí..."></textarea>
+    <button id="refresh">Actualizar</button>
+    <div id="preview"></div>
+    <button id="download">Descargar como Imagen</button>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script>
+        const input = document.getElementById('input');
+        const preview = document.getElementById('preview');
+        const refreshBtn = document.getElementById('refresh');
+        const downloadBtn = document.getElementById('download');
+
+        function updatePreview() {
+            preview.textContent = input.value;
+        }
+
+        input.addEventListener('input', updatePreview);
+        refreshBtn.addEventListener('click', updatePreview);
+
+        downloadBtn.addEventListener('click', () => {
+            html2canvas(preview).then(canvas => {
+                const link = document.createElement('a');
+                link.download = 'preview.png';
+                link.href = canvas.toDataURL();
+                link.click();
+            });
+        });
+    </script>
+</body>
+</html>
