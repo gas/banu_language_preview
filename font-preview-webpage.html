@@ -1,65 +1,62 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SRB2Banu</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@3.1.0/dist/full.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @font-face {
-            font-family: 'CustomFont';
+            font-family: 'Banu';
             src: url('./font/Banu-Regular.otf') format('opentype');
         }
-        .font-custom {
-            font-family: 'CustomFont', sans-serif;
-        }
-        .theme-toggle {
-            background: none;
-            border: none;
-            cursor: pointer;
-        }
-        .orange-theme {
-            background-color: #FFA500;
-            color: #000;
+        .font-banu {
+            font-family: 'Banu', sans-serif;
         }
     </style>
 </head>
-<body class="min-h-screen p-8 transition-colors duration-300 bg-white">
-    <div class="max-w-3xl mx-auto">
-        <div class="flex justify-between items-center mb-8">
-            <h1 class="text-3xl font-bold text-gray-900">SRB2Banu</h1>
-            <div class="flex space-x-2">
-                <button id="lightTheme" class="theme-toggle">🌞</button>
-                <button id="darkTheme" class="theme-toggle">🌙</button>
-                <button id="orangeTheme" class="theme-toggle">🍊</button>
+<body>
+    <div class="container mx-auto p-4">
+        <div class="navbar bg-base-100">
+            <div class="flex-1">
+                <h1 class="text-2xl font-bold">SRB2Banu</h1>
+            </div>
+            <div class="flex-none">
+                <div class="dropdown dropdown-end">
+                    <label tabindex="0" class="btn m-1">Tema</label>
+                    <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+                        <li><a onclick="setTheme('light')">Claro</a></li>
+                        <li><a onclick="setTheme('dark')">Oscuro</a></li>
+                        <li><a onclick="setTheme('cupcake')">Naranja</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
 
-        <div class="text-center mb-6">
-            <p class="text-gray-700">EN: SRB (Standard Romanized Banu) to Ochoa Visualizer</p>
-            <p class="text-gray-700">ES: Visualizador de SRB (Banu Estándar Romanizado) a Ochoa</p>
+        <div class="text-center my-4">
+            <p>EN: SRB (Standard Romanized Banu) to Ochoa Visualizer</p>
+            <p>ES: Visualizador de SRB (Banu Estándar Romanizado) a Ochoa</p>
         </div>
 
-        <div class="relative mb-4">
-            <textarea id="input" class="w-full h-40 p-4 border rounded-lg resize-none focus:ring-2 focus:ring-blue-500" placeholder="Introduce tu texto aquí..."></textarea>
+        <div class="form-control w-full">
+            <textarea id="input" class="textarea textarea-bordered h-24 w-full" placeholder="Introduce tu texto aquí..."></textarea>
         </div>
 
-        <div class="relative mb-4">
-            <div id="preview" class="w-full min-h-[100px] p-4 border rounded-lg overflow-auto whitespace-pre-wrap font-custom"></div>
+        <div class="mt-4 relative">
+            <div id="preview" class="border rounded-lg p-4 min-h-[100px] whitespace-pre-wrap font-banu"></div>
             <div class="absolute top-2 right-2 flex space-x-2">
-                <button id="increaseFontSize" class="p-1 bg-gray-200 rounded">➕</button>
-                <button id="decreaseFontSize" class="p-1 bg-gray-200 rounded">➖</button>
+                <button id="increaseFontSize" class="btn btn-circle btn-sm">+</button>
+                <button id="decreaseFontSize" class="btn btn-circle btn-sm">-</button>
             </div>
             <div class="absolute top-2 left-2 flex space-x-2">
-                <button id="alignLeft" class="p-1 bg-gray-200 rounded">⇤</button>
-                <button id="alignCenter" class="p-1 bg-gray-200 rounded">⇔</button>
-                <button id="alignRight" class="p-1 bg-gray-200 rounded">⇥</button>
+                <button id="alignLeft" class="btn btn-circle btn-sm">⇤</button>
+                <button id="alignCenter" class="btn btn-circle btn-sm">⇔</button>
+                <button id="alignRight" class="btn btn-circle btn-sm">⇥</button>
             </div>
         </div>
 
-        <button id="download" class="w-full py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors duration-300">
-            Descargar como Imagen
-        </button>
+        <button id="download" class="btn btn-primary w-full mt-4">Descargar como Imagen</button>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
@@ -70,14 +67,14 @@
         let fontSize = 16;
 
         function updatePreview() {
-            preview.textContent = input.value;
+            preview.textContent = input.value || ' ';  // Espacio en blanco para mantener el cuadro visible
+        }
+
+        function setTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
         }
 
         input.addEventListener('input', updatePreview);
-
-        document.getElementById('lightTheme').addEventListener('click', () => document.body.className = 'min-h-screen p-8 transition-colors duration-300 bg-white');
-        document.getElementById('darkTheme').addEventListener('click', () => document.body.className = 'min-h-screen p-8 transition-colors duration-300 bg-gray-800 text-white');
-        document.getElementById('orangeTheme').addEventListener('click', () => document.body.className = 'min-h-screen p-8 transition-colors duration-300 orange-theme');
 
         document.getElementById('increaseFontSize').addEventListener('click', () => {
             fontSize = Math.min(72, fontSize + 1);
